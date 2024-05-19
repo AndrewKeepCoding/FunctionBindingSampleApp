@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="FunctionBindingSampleApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:FunctionBindingSampleApp"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <local:TrueToVisibleConverter x:Key="TrueToVisibleConverter" />
+        <local:NotEmptyStringToVisibleConverter x:Key="NotEmptyStringToVisibleConverter" />
+    </Page.Resources>
+
+    <Grid
+        Padding="20"
+        ColumnDefinitions="Auto,*"
+        ColumnSpacing="20"
+        RowDefinitions="Auto,Auto,Auto"
+        RowSpacing="20">
+
+        <!--
+        <ToggleSwitch
+            x:Name="VisibilityToggleSwitch"
+            Grid.Row="0"
+            Grid.Column="0"
+            Header="TrueToVisibleConverter"
+            OffContent="Collapsed"
+            OnContent="Visible" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
+            FontSize="40"
+            Text="🤩"
+            Visibility="{x:Bind VisibilityToggleSwitch.IsOn, Mode=OneWay, Converter={StaticResource NotEmptyStringToVisibleConverter}}" />
+        -->
+
+        <!--
+        <TextBox
+            x:Name="VisibilityTextBox"
+            Grid.Row="1"
+            Grid.Column="0"
+            Header="NotEmptyStringToVisibleConverter" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
+            FontSize="40"
+            Text="🤩"
+            Visibility="{x:Bind VisibilityTextBox.Text, Mode=OneWay, Converter={StaticResource TrueToVisibleConverter }}" />
+        -->
+
+        <ToggleSwitch
+            x:Name="VisibilityToggleSwitch"
+            Grid.Row="0"
+            Grid.Column="0"
+            Header="TrueToVisible Function"
+            OffContent="Collapsed"
+            OnContent="Visible" />
+        <TextBlock
+            Grid.Row="0"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
+            FontSize="40"
+            Text="🤩"
+            Visibility="{x:Bind local:Functions.TrueToVisible(VisibilityToggleSwitch.IsOn), Mode=OneWay}" />
+
+        <TextBox
+            x:Name="VisibilityTextBox"
+            Grid.Row="1"
+            Grid.Column="0"
+            Header="NotEmptyStringToVisible Function" />
+        <TextBlock
+            Grid.Row="1"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
+            FontSize="40"
+            Text="🤩"
+            Visibility="{x:Bind local:Functions.NotEmptyStringToVisible(VisibilityTextBox.Text), Mode=OneWay}" />
+
+        <StackPanel
+            Grid.Row="2"
+            Grid.Column="0"
+            Orientation="Vertical">
+            <TextBlock Text="TrueToVisible Function" />
+            <ToggleSwitch
+                x:Name="AndOrToggleSwitch"
+                OffContent="AnyTrueToVisible"
+                OnContent="AllTrueToVisible" />
+            <StackPanel Orientation="Horizontal">
+                <CheckBox
+                    x:Name="VisibilityCheckBoxA"
+                    Content="A" />
+                <CheckBox
+                    x:Name="VisibilityCheckBoxB"
+                    Content="B" />
+                <CheckBox
+                    x:Name="VisibilityCheckBoxC"
+                    Content="C" />
+            </StackPanel>
+        </StackPanel>
+        <TextBlock
+            Grid.Row="2"
+            Grid.Column="1"
+            VerticalAlignment="Bottom"
+            FontSize="40"
+            Text="🤩"
+            Visibility="{x:Bind local:Functions.TrueToVisible(AndOrToggleSwitch.IsOn, VisibilityCheckBoxA .IsChecked, VisibilityCheckBoxB.IsChecked, VisibilityCheckBoxC.IsChecked), Mode=OneWay}" />
+
+    </Grid>
+
+</Page>

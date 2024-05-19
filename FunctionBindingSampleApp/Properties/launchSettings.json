@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "FunctionBindingSampleApp (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "FunctionBindingSampleApp (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
